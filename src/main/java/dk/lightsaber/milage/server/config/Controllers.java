@@ -20,7 +20,7 @@ public class Controllers {
     }
 
     @Bean
-    public IUserService userService(Logger logger) {
-        return new UserServiceImpl(userRepository, logger);
+    public IUserService userService() {
+        return new UserServiceImpl(userRepository);
     }
 }

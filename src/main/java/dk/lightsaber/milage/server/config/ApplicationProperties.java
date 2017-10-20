@@ -3,34 +3,27 @@ package dk.lightsaber.milage.server.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.nio.file.Path;
+
 @Configuration
 @ConfigurationProperties(prefix = "app")
 public class ApplicationProperties {
-    private String jdbcUrl;
-    private String jdbcUser;
-    private String jdbcPass;
+    private String appName;
+    private Path dbPropertyFilePath;
 
-    public String getJdbcUrl() {
-        return jdbcUrl;
+    public String getAppName() {
+        return appName;
     }
 
-    public void setJdbcUrl(String jdbcUrl) {
-        this.jdbcUrl = jdbcUrl;
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
-    public String getJdbcUser() {
-        return jdbcUser;
+    public Path getDbPropertyFilePath() {
+        return dbPropertyFilePath;
     }
 
-    public void setJdbcUser(String jdbcUser) {
-        this.jdbcUser = jdbcUser;
-    }
-
-    public String getJdbcPass() {
-        return jdbcPass;
-    }
-
-    public void setJdbcPass(String jdbcPass) {
-        this.jdbcPass = jdbcPass;
+    public void setDbPropertyFilePath(Path dbPropertyFilePath) {
+        this.dbPropertyFilePath = dbPropertyFilePath;
     }
 }

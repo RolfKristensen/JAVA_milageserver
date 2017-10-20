@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import dk.lightsaber.milage.server.config.Default;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +22,20 @@ import dk.lightsaber.milage.server.service.helpers.UserDtoPdoConverter;
 
 @Service
 public class UserServiceImpl implements IUserService {
+	private final static Logger LOGGER = LoggerFactory.getLogger(Default.class.getName());
+
 	private IUserJpaRepository userRepo;
-	private Logger log;
 	UserDtoPdoConverter converter;
 
-	public UserServiceImpl(IUserJpaRepository userRepo, Logger log) {
+	public UserServiceImpl(IUserJpaRepository userRepo) {
 		this.userRepo = userRepo;
-		this.log = log;
 		this.converter = new UserDtoPdoConverter();
 	}
 	
 	@Transactional
 	@Override
 	public List<UserDto> getAllRecords() {
-		log.debug("### public List<UserDto> getAllRecords()" );
+		LOGGER.debug("### public List<UserDto> getAllRecords()" );
 		return converter.convertToDtoList(userRepo.findAll());
 	}
 

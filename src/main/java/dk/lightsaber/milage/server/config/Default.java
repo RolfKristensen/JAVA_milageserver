@@ -3,7 +3,9 @@ package dk.lightsaber.milage.server.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -20,10 +22,14 @@ import javax.sql.DataSource;
 )
 @EnableTransactionManagement
 public class Default {
-    @Bean
-    public Logger getLogger() {
-        return LoggerFactory.getLogger("dk.lightsaber.milage");
+    private final static Logger LOGGER = LoggerFactory.getLogger(Default.class.getName());
+
+    private final ApplicationProperties props;
+
+    public Default(ApplicationProperties props) {
+        this.props = props;
     }
+
     @Bean
     public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
 
@@ -45,5 +51,16 @@ public class Default {
         JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(entityManagerFactory);
         return txManager;
+    }
+
+    @Bean
+    public DbConfig dbConfig() {
+        if (props.getDbPropertyFilePath() != null) {
+            return new DbPropertiesFileConfig(props.getDbPropertyFilePath());
+        } else {
+            LOGGER.info("No DB properties file defined");
+            // TODO: add support for ENV config
+            return null;
+        }
     }
 }
