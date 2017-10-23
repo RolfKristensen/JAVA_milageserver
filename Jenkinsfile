@@ -13,7 +13,7 @@ node {
    // Get the maven tool.
    // ** NOTE: This 'mvn' maven tool must be configured
    // **       in the global configuration.
-   def mvnHome = tool 'mvn3'
+   def mvnHome = tool 'maven'
 
    stage 'build'
    // set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
