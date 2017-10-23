@@ -56,6 +56,7 @@ public class Default {
     @Bean
     public DbConfig dbConfig() {
         if (props.getDbPropertyFilePath() != null) {
+            LOGGER.info("Using DB properties file: " + props.getDbPropertyFilePath());
             return new DbPropertiesFileConfig(props.getDbPropertyFilePath());
         } else {
             LOGGER.info("No DB properties file defined");
