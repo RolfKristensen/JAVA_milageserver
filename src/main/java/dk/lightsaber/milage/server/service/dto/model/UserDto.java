@@ -1,5 +1,7 @@
 package dk.lightsaber.milage.server.service.dto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class UserDto extends BaseDto {
@@ -46,6 +48,7 @@ public class UserDto extends BaseDto {
 		return this;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

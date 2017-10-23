@@ -7,4 +7,4 @@ ${Ansi.BLUE} | |  | | | | (_| | (_| |  __/${Ansi.RED}  / ____ \| |_) | |_) | | |
 ${Ansi.BLUE} |_|  |_|_|_|\__,_|\__, |\___|${Ansi.RED} /_/    \_\ .__/| .__/|_|_|\___\__,_|\__|_|\___/|_| |_|
 ${Ansi.BLUE}                    __/ |     ${Ansi.RED}          | |   | |
 ${Ansi.BLUE}                   |___/      ${Ansi.RED}          |_|   |_|
-${Ansi.GREEN} :: Spring Boot${spring-boot.formatted-version} :: ${Ansi.DEFAULT}
+${Ansi.GREEN} :: Spring Boot${spring-boot.formatted-version} :: @pom.version@ :: Build timestamp: @buildTimestamp@ :: ${Ansi.DEFAULT}
