@@ -4,12 +4,36 @@
 // This Jenkinsfile should simulate a minimal Jenkins pipeline and can serve as a starting point.
 // NOTE: sleep commands are solelely inserted for the purpose of simulating long running tasks when you run the pipeline
 node {
+    // adds job parameters within jenkinsfile
+    properties([
+     parameters([
+       stringParam(
+         description: 'Define a specific build version',
+         name: 'buildVersion',
+         defaultValue: 'NOT_DEFINED'
+       )
+     ])
+    ])
+
     // Mark the code checkout 'stage'....
     stage 'checkout'
 
     // Get some code from a GitHub repository
     git url: 'https://github.com/RolfKristensen/JAVA_milageserver'
     sh 'git clean -fdx'
+
+    def pomTree = readMavenPom file: 'pom.xml'
+    echo "pom version: ${pomTree.version}"
+    echo "build parameter: {params.buildVersion}"
+
+    def buildVersion;
+    if (params.buildVersion == 'NOT_DEFINED') {
+     buildVersion = pomTree.version
+    } else {
+     buildVersion = params.buildVersion
+    }
+    currentBuild.displayName = "#${env.BUILD_NUMBER} v${buildVersion}"
+    currentBuild.description = "Build version: ${buildVersion}, Branch: ${env.BRANCH_NAME}"
 
     // Get the maven tool.
     // ** NOTE: This 'mvn' maven tool must be configured
