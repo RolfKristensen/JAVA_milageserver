@@ -30,15 +30,5 @@ node {
     }
 
     stage 'install in local repo'
-    sh "${mvnHome}/bin/mvn install"
-
-    stage 'docker'
-    def dockerTool = tool 'docker'
-
-    sh "mkdir docker"
-    sh "cd docker"
-    git url: 'https://github.com/RolfKristensen/dockerfiles.git'
-    sh "cd dockerfiles/milageApp"
-    sh "cp ../../../target/milageserver-0.0.1-SNAPSHOT.jar milage.jar"
-    sh "docker build -t rolfkristensen/milage-rest:latest ."
+    sh "${mvnHome}/bin/mvn deploy"
 }
