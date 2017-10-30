@@ -10,6 +10,7 @@ public class UserDto extends BaseDto {
 	private String lastName;
 	private String email;
 	private String password;
+	private String authToken;
 	private List<CarDto> cars;
 
 	public long getId() {
@@ -56,6 +57,14 @@ public class UserDto extends BaseDto {
 	public UserDto setPassword(String password) {
 		this.password = password;
 		return this;
+	}
+
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
 	}
 
 	public List<CarDto> getCars() {

@@ -15,7 +15,6 @@ public class UserDtoPdoConverter implements DtoPdoConverter<UserDto, UserPdo> {
 				.setFirstName(dto.getFirstName())
 				.setLastName(dto.getLastName())
 				.setId(dto.getId());
-
 		return pdo;
 	}
 
@@ -26,6 +25,8 @@ public class UserDtoPdoConverter implements DtoPdoConverter<UserDto, UserPdo> {
 				.setFirstName(pdo.getFirstName())
 				.setId(pdo.getId())
 				.setLastName(pdo.getLastName());
+		dto.setAuthToken(pdo.getAuthToken());
+
 		CarDtoPdoConverter carConv = new CarDtoPdoConverter();
 
 		dto.setCars(carConv.convertToDtoList(pdo.getCars()));
