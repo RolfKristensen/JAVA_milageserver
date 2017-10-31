@@ -57,8 +57,8 @@ node {
     sh "${mvnHome}/bin/mvn deploy"
 
     stage 'docker build'
-    sh "${mvnhome}/bin/mvn dockerfile:build"
+    sh "${mvnHome}/bin/mvn dockerfile:build"
 
     stage 'docker push'
-    sh "${mvnhome}/bin/mvn dockerfile:push"
+    sh "${mvnHome}/bin/mvn dockerfile:push"
 }
