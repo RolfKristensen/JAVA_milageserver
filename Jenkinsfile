@@ -43,14 +43,16 @@ node {
     stage 'build'
     // set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
     // map artifacts to Jenkins builds
-    sh "${mvnHome}/bin/mvn versions:set -DnewVersion=${buildVersion}"
+    if (params.buildVersion != 'NOT_DEFINED') {
+      sh "${mvnHome}/bin/mvn versions:set -DnewVersion=${buildVersion}"
+    }
     sh "${mvnHome}/bin/mvn compile"
 
     stage 'test'
     sh "${mvnHome}/bin/mvn verify"
 
     stage 'nexus deploy'
-    sh "${mvnHome}/bin/mvn deploy"
+    sh "${mvnHome}/bin/mvn deploy -DskipTests"
 
     stage 'docker build'
     sh "${mvnHome}/bin/mvn dockerfile:build"
